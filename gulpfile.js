@@ -75,7 +75,7 @@
     ]));
 
     gulp.task('watch', function () {
-        gulp.watch('./*.js', ['js']);
+        gulp.watch('src/**/*.js', ['js']);
         return true;
     });
 

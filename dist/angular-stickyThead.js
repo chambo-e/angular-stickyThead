@@ -17,10 +17,15 @@
     function StickyTheadDirective($window) {
         return {
             restrict: 'A',
+            scope: {
+                zindex: '='
+            },
             link: function (scope, elem) {
                 if (elem[0].tagName !== 'TABLE') {
                     throw new Error('sticky-thead must be run on a table element.');
                 }
+
+                var zindex = scope.zindex || 1001;
 
                 var sticky = null,
                     theadHeight = elem.find('thead')[0].offsetHeight;
@@ -30,6 +35,7 @@
                     sticky.find('tbody').remove();
                     sticky.removeAttr('sticky-thead');
                     sticky.css({
+                        'z-index': zindex,
                         top: 0,
                         position: 'fixed',
                         display: 'none',
