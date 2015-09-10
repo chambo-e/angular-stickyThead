@@ -1,0 +1,18 @@
+{
+  "name": "angular-stickyThead",
+  "main": "dist/angular-stickyThead.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/chambo-e/angular-stickyThead",
+  "authors": [
+    "chambo-e <manu@ehmanu.com>"
+  ],
+  "description": "A pure Angular directive for making thead sticking to the top of the screen. No jQuery needed",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
