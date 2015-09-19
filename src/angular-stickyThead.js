@@ -12,9 +12,9 @@
     angular.module('angular-stickyThead', [])
         .directive('stickyThead', StickyTheadDirective);
 
-    StickyTheadDirective.$inject = ['$window'];
+    StickyTheadDirective.$inject = ['$window', '$timeout'];
 
-    function StickyTheadDirective($window) {
+    function StickyTheadDirective($window, $timeout) {
         return {
             restrict: 'A',
             scope: {
@@ -31,21 +31,24 @@
                     theadHeight = elem.find('thead')[0].offsetHeight;
 
                 function init() {
-                    sticky = elem.clone();
-                    sticky.find('tbody').remove();
-                    sticky.removeAttr('sticky-thead');
-                    sticky.css({
-                        'z-index': zindex,
-                        top: 0,
-                        position: 'fixed',
-                        display: 'none',
-                        border: 'none'
+                    $timeout(function () {
+                        sticky = elem.clone();
+                        sticky.find('tbody').remove();
+                        sticky.find('tfoot').remove();
+                        sticky.removeAttr('sticky-thead');
+                        sticky.css({
+                            'z-index': zindex,
+                            top: 0,
+                            position: 'fixed',
+                            display: 'none',
+                            border: 'none'
+                        });
+                        elem.parent()[0].insertBefore(sticky[0], elem[0]);
+                        onResize();
+                        if ($window.scrollY > 0) {
+                            onScroll();
+                        }
                     });
-                    elem.parent()[0].insertBefore(sticky[0], elem[0]);
-                    onResize();
-                    if ($window.scrollY > 0) {
-                        onScroll();
-                    }
                 }
 
                 function onResize() {
